@@ -1,43 +1,266 @@
-:root{
-    --cor-fundo: #01080E ;
-    --cor-principal: #0B0D20 ;
-    --cor-secundaria: #212333; 
-    --cor-destaque: #2BDEFD;
-    --cor-texto: #D7F9FF;
+:root {
+    /* Cores */
+    --cor-fundo: #111111;
+    --cor-principal: #1c1c1c;
+    --cor-secundaria: #292929;
 
+    --cor-destaque: #f5c400;
+    --cor-destaque-hover: #ffd21a;
+
+    --cor-texto: #f2f2f2;
+    --cor-texto-secundario: #a6a6a6;
+
+    --cor-borda: #3a3a3a;
+
+    /* Dimensões */
+    --raio-painel: 10px;
+    --raio-elemento: 7px;
+
+    /* Efeitos */
+    --sombra-painel: 0 15px 40px rgba(0, 0, 0, 0.55);
+    --transicao: 0.2s ease;
 }
+
+
+/* ==============================
+   RESET
+   ============================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ==============================
+   BODY
+   ============================== */
 
 body {
+    min-height: 100vh;
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+
+    -webkit-font-smoothing: antialiased;
 }
 
-.caixa-principal{
+
+/* ==============================
+   CAIXA PRINCIPAL
+   ============================== */
+
+.caixa-principal {
+    width: min(90%, 600px);
+
+    padding: 32px;
+
     background-color: var(--cor-principal);
-    width: 90%;
-    max-width: 600px;
+
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-painel);
+
+    box-shadow: var(--sombra-painel);
+
     text-align: center;
-    padding: 20px;
 }
 
-h1{
+
+/* ==============================
+   TÍTULO
+   ============================== */
+
+h1 {
+    margin-bottom: 28px;
+
     color: var(--cor-destaque);
+
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.15;
 }
 
-button {
+
+/* ==============================
+   PERGUNTAS
+   ============================== */
+
+.caixa-perguntas {
+    margin-bottom: 24px;
+
+    color: var(--cor-texto);
+
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+
+/* ==============================
+   ALTERNATIVAS
+   ============================== */
+
+.caixa-alternativas {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* ==============================
+   BOTÕES
+   ============================== */
+
+.caixa-alternativas button {
+    width: 100%;
+    min-height: 48px;
+
+    padding: 12px 18px;
+
     background-color: var(--cor-secundaria);
     color: var(--cor-texto);
-    border: none;
-    border-radius: 15px;
-    padding: 15px;
-    transition: background-color 0.3s;
+
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-elemento);
+
+    font: inherit;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background-color var(--transicao),
+        color var(--transicao),
+        border-color var(--transicao),
+        transform var(--transicao),
+        box-shadow var(--transicao);
 }
 
-button:hover{
+
+/* ==============================
+   HOVER
+   ============================== */
+
+.caixa-alternativas button:hover {
     background-color: var(--cor-destaque);
-    color: var(--cor-principal);
+    color: #111111;
+
+    border-color: var(--cor-destaque);
+
+    transform: translateX(3px);
+
+    box-shadow: 0 4px 12px rgba(245, 196, 0, 0.18);
+}
+
+
+/* ==============================
+   ACTIVE
+   ============================== */
+
+.caixa-alternativas button:active {
+    transform: translateX(1px);
+    box-shadow: none;
+}
+
+
+/* ==============================
+   FOCUS
+   ============================== */
+
+.caixa-alternativas button:focus-visible {
+    outline: 2px solid var(--cor-destaque);
+    outline-offset: 3px;
+}
+
+
+/* ==============================
+   RESULTADO
+   ============================== */
+
+.caixa-resultado {
+    display: none;
+
+    margin-top: 28px;
+    padding: 18px;
+
+    background-color: #161616;
+
+    border: 1px solid var(--cor-borda);
+    border-left: 4px solid var(--cor-destaque);
+    border-radius: var(--raio-elemento);
+
+    text-align: left;
+}
+
+.caixa-resultado.mostrar {
+    display: block;
+}
+
+.texto-resultado {
+    color: var(--cor-texto);
+
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+
+/* ==============================
+   RESPONSIVIDADE
+   ============================== */
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .caixa-principal {
+        width: 100%;
+        padding: 24px 20px;
+    }
+
+    h1 {
+        margin-bottom: 22px;
+        font-size: 1.7rem;
+    }
+
+    .caixa-perguntas {
+        font-size: 1rem;
+    }
+
+    .caixa-alternativas button {
+        min-height: 46px;
+        padding: 11px 15px;
+    }
+}
+
+
+/* ==============================
+   REDUÇÃO DE MOVIMENTO
+   ============================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+    }
 }
